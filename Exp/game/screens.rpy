@@ -253,14 +253,14 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Назад") action Rollback()
-            textbutton _("История") action ShowMenu('history')
-            textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Авто") action Preference("auto-forward", "toggle")
-            textbutton _("Сохранить") action ShowMenu('save')
-            textbutton _("Б.Сохр") action QuickSave()
-            textbutton _("Б.Загр") action QuickLoad()
-            textbutton _("Опции") action ShowMenu('preferences')
+            #textbutton _("Назад") action Rollback()
+            #textbutton _("История") action ShowMenu('history')
+            #textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
+            #textbutton _("Авто") action Preference("auto-forward", "toggle")
+            #textbutton _("Сохранить") action ShowMenu('save')
+            #textbutton _("Б.Сохр") action QuickSave()
+            #textbutton _("Б.Загр") action QuickLoad()
+            #textbutton _("Опции") action ShowMenu('preferences')
 
 
 ## Данный код гарантирует, что экран быстрого меню будет показан в игре в любое
@@ -580,7 +580,7 @@ style about_label_text:
 ## как они почти одинаковые, оба реализованы по правилам третьего экрана —
 ## file_slots.
 ##
-## https://www.renpy.org/doc/html/screen_special.html#save 
+## https://www.renpy.org/doc/html/screen_special.html#save
 
 screen save():
 
