@@ -1,18 +1,22 @@
-﻿# Вы можете расположить сценарий своей игры в этом файле.
-
-# Определение персонажей игры.
-define e = Character('Эйлин', color="#c8ffc8")
-
-# Вместо использования оператора image можете просто
-# складывать все ваши файлы изображений в папку images.
-# Например, сцену bg room можно вызвать файлом "bg room.png",
-# а eileen happy — "eileen happy.webp", и тогда они появятся в игре.
-
-# Игра начинается здесь:
+﻿define m = DynamicCharacter("name", color="#c8ffc8")
+screen name_input(prompt):
+    modal True
+    frame:
+        background Frame("#800000")
+        align(0.5,0.5)
+        xsize 250 ysize 250
+        vbox:
+            xfill True#Текст выравнивается относительно кнопки по горизонту
+            yfill True#Текст выравнивается относительно кнопки по вертикали
+            text prompt xalign 0.5
+            input id "input" xalign 0.5
+            hbox:
+                xalign 0.5
+                textbutton("Готово"):
+                    action Jump("begin")
 label start:
-
-    e "Вы создали новую игру Ren'Py."
-
-    e "Добавьте сюжет, изображения и музыку и отправьте её в мир!"
-
+    $ name = renpy.input("Введи имя: ", screen = "name_input", length=10)
+    return
+label begin:
+    ""
     return
