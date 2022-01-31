@@ -56,7 +56,7 @@ init:
                           add_sizes=True,
                           **properties)
         Shake = renpy.curry(_Shake)
-    $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
+    $ sshake = Shake((0, 0, 0, 0), 3.0, dist=10)
 image face_animation:
     "face bordered"
     pause .5
@@ -95,7 +95,7 @@ label main_menu:#####Пропуск меню.
     $Start()
 label start:
     scene black
-    show face_animation:
+    show face_animation with Dissolve(1):
         xalign 0.5
         yalign 0.25
     "Не смотри наверх."
@@ -118,7 +118,9 @@ label start:
     "Иначе..."
     "Оно меня убьет."
     hide face_animation with Dissolve(2)
-    scene dead_family with Dissolve(3)#Окровавленная семья
+    show dead_family with fade(3):#Окровавленная семья
+        xalign 0.5
+        yalign 0.25
     scene bloody_hands with Dissolve(2)#Трясущие руки
     scene hall with Dissolve(2)#коридор выбор комнат
     scene room1 #1 комната
