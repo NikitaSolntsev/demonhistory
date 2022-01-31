@@ -1,4 +1,4 @@
-define mc = Character("", color="#800000")
+#define mc = Character("", color="#800000")
 #screen name_input(prompt):##############Экран ввода
 #    modal True
 #    frame:
@@ -31,7 +31,6 @@ label splashscreen:
 label main_menu:#####Пропуск меню.
     $Start()
 label start:
-    # scene face with Dissolve(1.3)#Растерянное лицо героя
     scene black
     show face_animation:
         xalign 0.5
