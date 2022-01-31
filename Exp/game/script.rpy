@@ -18,6 +18,26 @@ image face_animation:
     "face bordered"
     pause .5
     "face bordered2"
+    pause .2
+    "face bordered3"
+    pause .2
+    "face bordered"
+    pause .5
+    "face bordered4"
+    pause .5
+    "face bordered3"
+    pause .5
+    "face bordered2"
+    pause .3
+    "face bordered4"
+    pause .5
+    "face bordered"
+    pause .5
+    "face bordered3"
+    pause .2
+    "face bordered2"
+    pause .2
+    "face bordered"
     pause .5
     repeat
 label splashscreen:
