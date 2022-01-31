@@ -202,10 +202,6 @@ label dei1:
                 else:
                     "мы тут уже искали"
                 jump dei1
-        #else:
-        #    "dadadad"
-        #    jump hall
-            #show screen end_search()
     else:########### ЕСТЬ КЛЮЧ
         "Где же может быть ключ?"
         call screen kitchenmap with Dissolve(1)
