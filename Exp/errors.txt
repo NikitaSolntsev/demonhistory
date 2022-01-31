@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 16: u'jump' is not a keyword argument or valid child for the textbutton statement.
-    action jump("next")
-               ^
+File "game/script.rpy", line 18: expected statement.
+    modal True
+              ^
 
 Ren'Py Version: Ren'Py 7.4.10.2178
-Mon Jan 31 01:25:17 2022
+Mon Jan 31 02:15:36 2022

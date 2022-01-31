@@ -49,8 +49,8 @@ define gui.muted_color = u'#510000'
 define gui.hover_muted_color = u'#7a0000'
 
 ## Цвета, используемые в тексте диалогов и выборов.
-define gui.text_color = u'#ffffff'
-define gui.interface_text_color = u'#ffffff'
+define gui.text_color = u'#f00000'
+define gui.interface_text_color = u'#f00000'
 
 
 ## Шрифты и их размеры #########################################################
@@ -65,16 +65,16 @@ define gui.name_text_font = "vcrosdmonorusbyd.ttf"
 define gui.interface_text_font = "vcrosdmonorusbyd.ttf"
 
 ## Размер нормального текста диалога.
-define gui.text_size = 33
+define gui.text_size = 24
 
 ## Размер имён персонажей.
-define gui.name_text_size = 45
+define gui.name_text_size = 32
 
 ## Размер текста в пользовательском интерфейсе.
-define gui.interface_text_size = 33
+define gui.interface_text_size = 24
 
 ## Размер заголовков в пользовательском интерфейсе.
-define gui.label_text_size = 36
+define gui.label_text_size = 32
 
 ## Размер текста на экране уведомлений.
 define gui.notify_text_size = 24
@@ -105,7 +105,7 @@ define gui.textbox_yalign = 1.0
 ## Местоположение имени говорящего персонажа по отношению к текстовому окну.
 ## Это могут быть целые значения в пикселях слева и сверху от начала окна или
 ## процентное отношение, например, 0.5 для центрирования.
-define gui.name_xpos = 360
+define gui.name_xpos = 144
 define gui.name_ypos = 0
 
 ## Горизонтальное выравнивание имени персонажа. Это может быть 0.0 для
@@ -130,7 +130,7 @@ define gui.namebox_tile = False
 ## Размещение диалога по отношению к текстовому окну. Это могут быть целые
 ## значения в пикселях слева и сверху от текстового окна или процентное
 ## отношение, например, 0.5 для центрирования.
-define gui.dialogue_xpos = 402
+define gui.dialogue_xpos = 150
 define gui.dialogue_ypos = 75
 
 ## Максимальная ширина текста диалога в пикселях.
