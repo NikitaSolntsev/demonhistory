@@ -14,7 +14,29 @@
 #                xalign 0.5
 #                textbutton("Готово"):
 #                    action Jump(" ")
+screen imagemap:
+    imagemap:
+        xalign 0.5
+        yalign 0.25
+        ground "hall.png"
+        hover "hall_all.png"
+        hotspot (78, 21, 224, 594) clicked Return("us1")
+        hotspot (667, 20, 827, 596) clicked Return("us2")
+        #hotspot (393, 118, 537, 395) clicked Return("us3")
+screen kitchenmap:
+    imagemap:
+        xalign 0.5
+        yalign 0.25
+        ground "kitchen.png"
+        hover "kitchen_all.png"
+        hotspot (672, 7, 897, 294) clicked Return("kit1")
+        hotspot (465, 102, 206, 296) clicked Return("kit2")
+        hotspot (57, 398, 285, 491) clicked Return("kit3")
+transform defaultpos:
+    xalign 0.5
+    yalign 0.25
 init:
+    $keyisfirst = 0
     python:
         import math
         class Shaker(object):
@@ -103,7 +125,7 @@ label start:
     "{size=+10}Н{/size}е с{size=+10}мо{/size}три н{size=+10}аве{/size}рх." with sshake
     "Не {size=+10}cмотри{/size} наверх." with sshake
     "Не {size=+15}cм{/size}о{size=+12}три{/size} нав{size=+14}ерх{/size}." with sshake
-    "В страхе я говорил себе."
+    "Я в страхе повторял себе эти слова."
     "Не знаю, сколько времени я уже сижу {vspace=15}с растерянным и испуганным лицом."
     "Мое тело не слушается меня, я долго {vspace=15}и неподвижно сидел в центре комнаты."
     "Воздух в комнате с каждой секундой {vspace=15}становился все тяжелее."
@@ -117,20 +139,52 @@ label start:
     "Нельзя смотреть наверх."
     "Иначе..."
     "Оно меня убьет."
-    hide face_animation with Dissolve(2)
-    show dead_family with fade(3):#Окровавленная семья
+    "Убьет точно так же, как..."
+    hide face_animation with Fade(1,1,1)
+    "Мою семью."
+    show family with sshake:#Окровавленная семья
         xalign 0.5
         yalign 0.25
-    scene bloody_hands with Dissolve(2)#Трясущие руки
-    scene hall with Dissolve(2)#коридор выбор комнат
-    scene room1 #1 комната
-    scene room2 #2 комната
-    scene keys with Dissolve(1)#Ключ
-    scene door_exit #входная дверь
-    scene door_open #открывание двери
-    scene shadow # тень монстра
-    scene close_door # закрытие двери
-    scene door_op #опирается на дверь
-    scene eyes_up #Смотрит наверх
-    scene screamer #скример
+    " "#
+    hide family with Dissolve(1)
+    call screen imagemap
+    $ result = _return
+    if result == "us1":
+                    jump dei1
+    elif result == "us2":
+                    jump dei2
+
+$ keyisfirst = 0
 return
+label dei1:
+    hide screen imagemap with Dissolve(2)
+    if keyisfirst == 0:######## НЕТ КЛЮЧА
+        $ keyisfirst += 1
+        "Где же может быть ключ?"
+        call screen kitchenmap with Dissolve(1)
+        show kitchen at defaultpos
+        $result = _return
+        if result == "kit1":
+            "нет"
+        if result == "kit2":
+            ""
+        if result == "kit3":
+            ""
+    else:########### ЕСТЬ КЛЮЧ
+        "Где же может быть ключ?"
+        call screen kitchenmap with Dissolve(1)
+        show kitchen at defaultpos
+        $result = _return
+        if result == "kit1":
+            "нашел."
+        if result == "kit2":
+            ""
+        if result == "kit3":
+            ""
+    return
+label dei2:
+    if keyisfirst == 0: ######## НЕТ КЛЮЧА
+        $keyisfirst += 1
+    else:########### ЕСТЬ КЛЮЧ
+        "нет"
+    return
