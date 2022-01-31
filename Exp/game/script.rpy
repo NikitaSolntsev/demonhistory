@@ -1,19 +1,17 @@
 #define mc = Character("", color="#800000")
-#screen name_input(prompt):##############Экран ввода
-#    modal True
-#    frame:
-#        background Frame("#800000")
-#        align(0.5,0.5)
-#        xsize 350 ysize 250
-#        vbox:
-#            xfill True#Текст выравнивается относительно кнопки по горизонту
-#            yfill True#Текст выравнивается относительно кнопки по вертикали
-#            text prompt xalign 0.5
-#            input id "input" xalign 0.5
-#            hbox:
-#                xalign 0.5
-#                textbutton("Готово"):
-#                    action Jump(" ")
+screen end_search():##############button
+    modal True
+    frame:
+        background Frame("#800000")
+        align(0.5,0.5)
+        xsize 350 ysize 250
+        vbox:
+            xfill True#Текст выравнивается относительно кнопки по горизонту
+            yfill True#Текст выравнивается относительно кнопки по вертикали
+            hbox:
+                xalign 0.5
+                textbutton("Закончить поиск"):
+                    action Jump("hall")
 screen imagemap:
     imagemap:
         xalign 0.5
@@ -22,7 +20,6 @@ screen imagemap:
         hover "hall_all.png"
         hotspot (78, 21, 224, 594) clicked Return("us1")
         hotspot (667, 20, 827, 596) clicked Return("us2")
-        #hotspot (393, 118, 537, 395) clicked Return("us3")
 screen kitchenmap:
     imagemap:
         xalign 0.5
@@ -147,44 +144,109 @@ label start:
         yalign 0.25
     " "#
     hide family with Dissolve(1)
+    $kitchen = 0
+    jump hall
+label hall:
+    $ roomkey = 0
     call screen imagemap
     $ result = _return
-    if result == "us1":
-                    jump dei1
-    elif result == "us2":
-                    jump dei2
-
-$ keyisfirst = 0
+    #kitchen
+    $shk1 = 0
+    $shk2 = 0
+    $shk3 = 0
+    if kitchen == 0:
+        if result == "us1":
+            if roomkey == 0:
+                $ roomkey = 2
+            $kitchen = 1
+            jump dei1
+        elif result == "us2":
+            if roomkey == 0:
+                $ roomkey = 1
+            jump dei2
+    else:
+        "я там уже был"
+        jump hall
+hide screen imagemap with Dissolve(2)
 return
 label dei1:
-    hide screen imagemap with Dissolve(2)
-    if keyisfirst == 0:######## НЕТ КЛЮЧА
-        $ keyisfirst += 1
-        "Где же может быть ключ?"
-        call screen kitchenmap with Dissolve(1)
+    if roomkey == 2:######## НЕТ КЛЮЧА
+        if shk1 == 1 and shk2 == 1 and shk3 == 1:
+            "Тут уже ничего нет"
+            jump hall
+        call screen kitchenmap
         show kitchen at defaultpos
         $result = _return
-        if result == "kit1":
-            "нет"
-        if result == "kit2":
-            ""
-        if result == "kit3":
-            ""
+        if shk1 != 1 or shk2 != 1 or shk3 != 1:
+            if result == "kit1":
+                if shk1 == 0:
+                    $shk1 = 1
+                    "давай поищем тут"
+                    "ничего нет"
+                else:
+                    "мы тут уже искали"
+                jump dei1
+            if result == "kit2":
+                if shk2 == 0:
+                    $shk2 = 1
+                    "давай поищем тут"
+                    "ничего нет"
+                else:
+                    "мы тут уже искали"
+                jump dei1
+            if result == "kit3":
+                if shk3 == 0:
+                    $shk3 = 1
+                    "давай поищем тут"
+                    "ничего нет"
+                else:
+                    "мы тут уже искали"
+                jump dei1
+        #else:
+        #    "dadadad"
+        #    jump hall
+            #show screen end_search()
     else:########### ЕСТЬ КЛЮЧ
         "Где же может быть ключ?"
         call screen kitchenmap with Dissolve(1)
         show kitchen at defaultpos
         $result = _return
+        $open = 0
         if result == "kit1":
-            "нашел."
+            if shk1 == 0:
+                $shk1 = 1
+                $open += 1
+                if open == 3:
+                    "нашел"
+                else:
+                    "нет"
+            else:
+                "мы тут уже искали"
         if result == "kit2":
-            ""
+            if shk2 == 0:
+                $shk2 = 1
+                $open += 1
+                if open == 3:
+                    "нашел"
+                else:
+                    "нет"
+            else:
+                "мы тут уже искали"
         if result == "kit3":
-            ""
+            if shk3 == 0:
+                $shk3 = 1
+                $open += 1
+                if open == 3:
+                    "нашел"
+                else:
+                    "нет"
+            else:
+                "мы тут уже искали"
+        jump hall
     return
 label dei2:
-    if keyisfirst == 0: ######## НЕТ КЛЮЧА
-        $keyisfirst += 1
+    if roomkey == 1:
+        ""  ######## НЕТ КЛЮЧА
     else:########### ЕСТЬ КЛЮЧ
         "нет"
     return
