@@ -1,4 +1,6 @@
 #define mc = Character("", color="#800000")
+#ПОСЛЕ ДВУХ ВЫБОРОВ, ПРИ ВЫБОРЕ ПРАВОЙ ДВЕРИ ОТКРЫВАЕТСЯ КУХНЯ(ЛЕВАЯ).
+#ПРОВЕРЯЮТСЯ ДВЕ КОМНАТЫ, НО УСЛОВИЕ С НАХОЖДЕНИЕМ КЛЮЧА НЕ РАБОТАЕТ
 screen end_search():##############button
     modal True
     frame:
@@ -20,6 +22,15 @@ screen imagemap:
         hover "hall_all.png"
         hotspot (78, 21, 224, 594) clicked Return("us1")
         hotspot (667, 20, 827, 596) clicked Return("us2")
+screen bedroom:
+    imagemap:
+        xalign 0.5
+        yalign 0.25
+        ground "bedroom.png"
+        hover "bedroom_all.png"
+        hotspot (78, 453, 292, 595) clicked Return("bed1")
+        hotspot (261, 273, 400, 210) clicked Return("bed2")
+        hotspot (501, 264, 890, 594) clicked Return("bed3")
 screen kitchenmap:
     imagemap:
         xalign 0.5
@@ -148,8 +159,13 @@ label start:
     jump hall
 label hall:
     $ roomkey = 0
+    $ result = 0
     call screen imagemap
     $ result = _return
+    #bedroom
+    $bed1 = 0
+    $bed2 = 0
+    $bed3 = 0
     #kitchen
     $shk1 = 0
     $shk2 = 0
@@ -170,12 +186,12 @@ label hall:
 hide screen imagemap with Dissolve(2)
 return
 label dei1:
+    show kitchen at defaultpos
     if roomkey == 2:######## НЕТ КЛЮЧА
         if shk1 == 1 and shk2 == 1 and shk3 == 1:
             "Тут уже ничего нет"
             jump hall
         call screen kitchenmap
-        show kitchen at defaultpos
         $result = _return
         if shk1 != 1 or shk2 != 1 or shk3 != 1:
             if result == "kit1":
@@ -241,8 +257,38 @@ label dei1:
         jump hall
     return
 label dei2:
-    if roomkey == 1:
-        ""  ######## НЕТ КЛЮЧА
+    show bedroom at defaultpos
+    if roomkey == 1:######## НЕТ КЛЮЧА
+        if bed1 == 1 and bed2 == 1 and bed3 == 1:
+            "Тут уже ничего нет"
+            jump hall
+        call screen bedroom
+        $result = _return
+        if bed1 != 1 or bed2 != 1 or bed3 != 1:
+            if result == "bed1":
+                if bed1 == 0:
+                    $bed1 = 1
+                    "давай поищем тут"
+                    "ничего нет"
+                else:
+                    "мы тут уже искали"
+                jump dei2
+            if result == "bed2":
+                if bed2 == 0:
+                    $bed2 = 1
+                    "давай поищем тут"
+                    "ничего нет"
+                else:
+                    "мы тут уже искали"
+                jump dei2
+            if result == "bed3":
+                if bed3 == 0:
+                    $bed3 = 1
+                    "давай поищем тут"
+                    "ничего нет"
+                else:
+                    "мы тут уже искали"
+                jump dei2
     else:########### ЕСТЬ КЛЮЧ
         "нет"
     return

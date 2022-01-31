@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 243: if statement expects a non-empty block.
-    if roomkey == 1: 
-                     ^
-
-File "game/script.rpy", line 244: expected statement.
-    else:
-        ^
+File "game/script.rpy", line 170: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation.
+    if result == "us1":
+    ^
 
 Ren'Py Version: Ren'Py 7.4.10.2178
-Tue Feb  1 02:04:32 2022
+Tue Feb  1 02:38:50 2022

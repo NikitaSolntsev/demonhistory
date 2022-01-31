@@ -33,4 +33,4 @@ AttributeError: 'NoneType' object has no attribute 'stores'
 Windows-10-10.0.19041
 Ren'Py 7.4.10.2178
 Не смотри наверх. 1.0
-Tue Feb  1 02:04:47 2022
+Tue Feb  1 02:39:02 2022
