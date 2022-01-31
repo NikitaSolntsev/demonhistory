@@ -14,6 +14,18 @@
 #                xalign 0.5
 #                textbutton("Готово"):
 #                    action Jump(" ")
+screen imagemap:
+    imagemap:
+        xalign 0.5
+        yalign 0.25
+        ground "hall.png"
+        hover "hall_all.png"
+        hotspot (78, 21, 224, 594) clicked Return("us1")
+        hotspot (667, 20, 827, 596) clicked Return("us2")
+        #hotspot (393, 118, 537, 395) clicked Return("us3")
+transform defaultpos:
+    xalign 0.5
+    yalign 0.25
 init:
     python:
         import math
@@ -103,7 +115,7 @@ label start:
     "{size=+10}Н{/size}е с{size=+10}мо{/size}три н{size=+10}аве{/size}рх." with sshake
     "Не {size=+10}cмотри{/size} наверх." with sshake
     "Не {size=+15}cм{/size}о{size=+12}три{/size} нав{size=+14}ерх{/size}." with sshake
-    "В страхе я говорил себе."
+    "Я в страхе повторял себе эти слова."
     "Не знаю, сколько времени я уже сижу {vspace=15}с растерянным и испуганным лицом."
     "Мое тело не слушается меня, я долго {vspace=15}и неподвижно сидел в центре комнаты."
     "Воздух в комнате с каждой секундой {vspace=15}становился все тяжелее."
@@ -117,20 +129,33 @@ label start:
     "Нельзя смотреть наверх."
     "Иначе..."
     "Оно меня убьет."
-    hide face_animation with Dissolve(2)
-    show dead_family with fade(3):#Окровавленная семья
+    "Убьет точно так же, как..."
+    hide face_animation with Fade(1,1,1)
+    "Мою семью."
+    show family with sshake:#Окровавленная семья
         xalign 0.5
         yalign 0.25
-    scene bloody_hands with Dissolve(2)#Трясущие руки
-    scene hall with Dissolve(2)#коридор выбор комнат
-    scene room1 #1 комната
-    scene room2 #2 комната
-    scene keys with Dissolve(1)#Ключ
-    scene door_exit #входная дверь
-    scene door_open #открывание двери
-    scene shadow # тень монстра
-    scene close_door # закрытие двери
-    scene door_op #опирается на дверь
-    scene eyes_up #Смотрит наверх
-    scene screamer #скример
+    " "
+    hide family with Dissolve(1)
+    call screen imagemap
+        #$ result = renpy.imagemap("hall.png", "hall_all.png", [
+        #(78, 21, 224, 594, "us1"),
+        #(672, 23, 824, 595, "us2"),
+        #(394, 116, 536, 397, "us3"),
+        #], focus="imagemap")
+        #xalign 0.5
+        #yalign 0.25
+    if result == "us1":
+                    jump dei1
+    elif result == "us2":
+                    jump dei2
+
 return
+label dei1:
+    hide screen imagemap with Dissolve(1)
+    show kitchen at defaultpos with Dissolve(1)
+    " "
+    return
+label dei2:
+
+    return

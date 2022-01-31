@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 18: expected statement.
-    modal True
-              ^
+File "game/script.rpy", line 131: expected statement.
+    frame:
+         ^
 
 Ren'Py Version: Ren'Py 7.4.10.2178
-Mon Jan 31 02:15:36 2022
+Tue Feb  1 00:46:32 2022
