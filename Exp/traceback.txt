@@ -39,4 +39,4 @@ Exception: Couldn't find a place to stop rolling back. Perhaps the script change
 Windows-10-10.0.19041
 Ren'Py 7.4.10.2178
 Не смотри вверх. 1.0
-Mon Jan 31 02:18:24 2022
+Mon Jan 31 02:49:52 2022
