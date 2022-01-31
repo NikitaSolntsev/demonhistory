@@ -14,6 +14,12 @@ define mc = Character("", color="#800000")
 #                xalign 0.5
 #                textbutton("Готово"):
 #                    action Jump(" ")
+image face_animation:
+    "face bordered"
+    pause .5
+    "face bordered2"
+    pause .5
+    repeat
 label splashscreen:
     scene black
     pause(2)
@@ -27,7 +33,7 @@ label main_menu:#####Пропуск меню.
 label start:
     # scene face with Dissolve(1.3)#Растерянное лицо героя
     scene black
-    show face bordered:
+    show face_animation:
         xalign 0.5
         yalign 0.25
     "Не смотри наверх."
