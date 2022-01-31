@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 131: expected statement.
-    frame:
-         ^
+File "game/script.rpy", line 178: if statement expects a non-empty block.
+    if result == "kit2":
+                        ^
+
+File "game/script.rpy", line 179: if statement expects a non-empty block.
+    if result == "kit3":
+                        ^
 
 Ren'Py Version: Ren'Py 7.4.10.2178
-Tue Feb  1 00:46:32 2022
+Tue Feb  1 01:15:06 2022

@@ -23,10 +23,20 @@ screen imagemap:
         hotspot (78, 21, 224, 594) clicked Return("us1")
         hotspot (667, 20, 827, 596) clicked Return("us2")
         #hotspot (393, 118, 537, 395) clicked Return("us3")
+screen kitchenmap:
+    imagemap:
+        xalign 0.5
+        yalign 0.25
+        ground "kitchen.png"
+        hover "kitchen_all.png"
+        hotspot (672, 7, 897, 294) clicked Return("kit1")
+        hotspot (465, 102, 206, 296) clicked Return("kit2")
+        hotspot (57, 398, 285, 491) clicked Return("kit3")
 transform defaultpos:
     xalign 0.5
     yalign 0.25
 init:
+    $keyisfirst = 0
     python:
         import math
         class Shaker(object):
@@ -135,27 +145,46 @@ label start:
     show family with sshake:#Окровавленная семья
         xalign 0.5
         yalign 0.25
-    " "
+    " "#
     hide family with Dissolve(1)
     call screen imagemap
-        #$ result = renpy.imagemap("hall.png", "hall_all.png", [
-        #(78, 21, 224, 594, "us1"),
-        #(672, 23, 824, 595, "us2"),
-        #(394, 116, 536, 397, "us3"),
-        #], focus="imagemap")
-        #xalign 0.5
-        #yalign 0.25
+    $ result = _return
     if result == "us1":
                     jump dei1
     elif result == "us2":
                     jump dei2
 
+$ keyisfirst = 0
 return
 label dei1:
-    hide screen imagemap with Dissolve(1)
-    show kitchen at defaultpos with Dissolve(1)
-    " "
+    hide screen imagemap with Dissolve(2)
+    if keyisfirst == 0:######## НЕТ КЛЮЧА
+        $ keyisfirst += 1
+        "Где же может быть ключ?"
+        call screen kitchenmap with Dissolve(1)
+        show kitchen at defaultpos
+        $result = _return
+        if result == "kit1":
+            "нет"
+        if result == "kit2":
+            ""
+        if result == "kit3":
+            ""
+    else:########### ЕСТЬ КЛЮЧ
+        "Где же может быть ключ?"
+        call screen kitchenmap with Dissolve(1)
+        show kitchen at defaultpos
+        $result = _return
+        if result == "kit1":
+            "нашел."
+        if result == "kit2":
+            ""
+        if result == "kit3":
+            ""
     return
 label dei2:
-
+    if keyisfirst == 0: ######## НЕТ КЛЮЧА
+        $keyisfirst += 1
+    else:########### ЕСТЬ КЛЮЧ
+        "нет"
     return
