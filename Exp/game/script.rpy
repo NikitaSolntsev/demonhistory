@@ -1,6 +1,4 @@
 #define mc = Character("", color="#800000")
-#ПОСЛЕ ДВУХ ВЫБОРОВ, ПРИ ВЫБОРЕ ПРАВОЙ ДВЕРИ ОТКРЫВАЕТСЯ КУХНЯ(ЛЕВАЯ).
-#ПРОВЕРЯЮТСЯ ДВЕ КОМНАТЫ, НО УСЛОВИЕ С НАХОЖДЕНИЕМ КЛЮЧА НЕ РАБОТАЕТ
 screen end_search():##############button
     modal True
     frame:
@@ -40,6 +38,13 @@ screen kitchenmap:
         hotspot (672, 7, 897, 294) clicked Return("kit1")
         hotspot (465, 102, 206, 296) clicked Return("kit2")
         hotspot (57, 398, 285, 491) clicked Return("kit3")
+screen keyfound:
+    imagemap:
+        xalign 0.5
+        yalign 0.25
+        ground "hall.png"
+        hover "hall 3.png"
+        hotspot(391, 114, 200, 320) clicked Jump("final")
 transform defaultpos:
     xalign 0.5
     yalign 0.25
@@ -310,8 +315,14 @@ label dei2:
         show bedroom at defaultpos
         "Тут есть ключ. Тыкаем на предметы и тд"
         jump key_found
-    return
 label key_found:
     scene black
-    show hall at defaultpos with Dissolve(3)
+    show screen keyfound with Dissolve(2)
+    $ result = _return
     "Я нашел ключ"
+    jump final
+label final:
+    hide screen keyfound
+    scene street with Dissolve(1)
+    "я сбежал"
+    " "

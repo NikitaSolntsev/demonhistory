@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 170: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation.
-    if result == "us1":
-    ^
+File "game/script.rpy", line 47: u'hotpost' is not a keyword argument or valid child for the imagemap statement.
+    hotpost(391, 114, 538, 397) clicked Return("exit")
+           ^
 
 Ren'Py Version: Ren'Py 7.4.10.2178
-Tue Feb  1 02:38:50 2022
+Tue Feb  1 23:15:23 2022
