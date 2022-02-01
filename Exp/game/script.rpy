@@ -44,6 +44,7 @@ transform defaultpos:
     xalign 0.5
     yalign 0.25
 init:
+    $open1 = 0
     $keyisfirst = 0
     python:
         import math
@@ -155,10 +156,12 @@ label start:
         yalign 0.25
     " "#
     hide family with Dissolve(1)
-    $kitchen = 0
+    $ roomkey = 0
     jump hall
 label hall:
-    $ roomkey = 0
+    hide screen kithchenmap
+    hide screen bedroom
+    $kitchen = 0
     $ result = 0
     call screen imagemap
     $ result = _return
@@ -170,6 +173,7 @@ label hall:
     $shk1 = 0
     $shk2 = 0
     $shk3 = 0
+    "kitchen = [kitchen], result = [result], roomkey = [roomkey]"
     if kitchen == 0:
         if result == "us1":
             if roomkey == 0:
@@ -186,10 +190,12 @@ label hall:
 hide screen imagemap with Dissolve(2)
 return
 label dei1:
-    show kitchen at defaultpos
+    hide bedroom
     if roomkey == 2:######## НЕТ КЛЮЧА
+        show kitchen at defaultpos
         if shk1 == 1 and shk2 == 1 and shk3 == 1:
             "Тут уже ничего нет"
+            hide kitchen
             jump hall
         call screen kitchenmap
         $result = _return
@@ -219,48 +225,57 @@ label dei1:
                     "мы тут уже искали"
                 jump dei1
     else:########### ЕСТЬ КЛЮЧ
+        hide bedroom
+        show kitchen at defaultpos
         "Где же может быть ключ?"
         call screen kitchenmap with Dissolve(1)
         show kitchen at defaultpos
         $result = _return
-        $open = 0
         if result == "kit1":
             if shk1 == 0:
                 $shk1 = 1
-                $open += 1
-                if open == 3:
+                $open1 += 1
+                if open1 == 3:
                     "нашел"
                 else:
                     "нет"
+                    jump dei1
             else:
                 "мы тут уже искали"
+                jump dei1
         if result == "kit2":
             if shk2 == 0:
                 $shk2 = 1
-                $open += 1
-                if open == 3:
+                $open1 += 1
+                if open1 == 3:
                     "нашел"
                 else:
                     "нет"
+                    jump dei1
             else:
                 "мы тут уже искали"
+                jump dei1
         if result == "kit3":
             if shk3 == 0:
                 $shk3 = 1
-                $open += 1
-                if open == 3:
+                $open1 += 1
+                if open1 == 3:
                     "нашел"
                 else:
                     "нет"
+                    jump dei1
             else:
                 "мы тут уже искали"
-        jump hall
+                jump dei1
+        hide kitchen
+        jump key_found
     return
 label dei2:
-    show bedroom at defaultpos
     if roomkey == 1:######## НЕТ КЛЮЧА
+        show bedroom at defaultpos
         if bed1 == 1 and bed2 == 1 and bed3 == 1:
             "Тут уже ничего нет"
+            hide bedroom
             jump hall
         call screen bedroom
         $result = _return
@@ -289,6 +304,14 @@ label dei2:
                 else:
                     "мы тут уже искали"
                 jump dei2
+        hide bedroom
+        jump hall
     else:########### ЕСТЬ КЛЮЧ
-        "нет"
+        show bedroom at defaultpos
+        "Тут есть ключ. Тыкаем на предметы и тд"
+        jump key_found
     return
+label key_found:
+    scene black
+    show hall at defaultpos with Dissolve(3)
+    "Я нашел ключ"
