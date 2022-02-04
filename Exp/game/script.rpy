@@ -39,12 +39,19 @@ screen kitchenmap:
         hotspot (465, 102, 206, 296) clicked Return("kit2")
         hotspot (57, 398, 285, 491) clicked Return("kit3")
 screen keyfound:
+    modal True
     imagemap:
         xalign 0.5
         yalign 0.25
         ground "hall.png"
         hover "hall 3.png"
-        hotspot(391, 114, 200, 320) clicked Jump("final")
+        hotspot(391, 114, 200, 320) clicked Return("final")
+#screen movie:
+    #$count = 0
+    #modal True
+    #if count == 0:
+        #$renpy.movie_cutscene('hall_video3.WEBM')
+        #$count = 1
 transform defaultpos:
     xalign 0.5
     yalign 0.25
@@ -126,6 +133,7 @@ label splashscreen:
     pause(2)
     hide text with Dissolve(2)
     pause(1)
+    pause(2)
     return
 label main_menu:#####Пропуск меню.
     $Start()
@@ -154,6 +162,9 @@ label start:
     "Иначе..."
     "Оно меня убьет."
     "Убьет точно так же, как..."
+    #show hands:
+    #    xalign 0.5
+    #    yalign 0.25
     hide face_animation with Fade(1,1,1)
     "Мою семью."
     show family with sshake:#Окровавленная семья
@@ -178,7 +189,7 @@ label hall:
     $shk1 = 0
     $shk2 = 0
     $shk3 = 0
-    "kitchen = [kitchen], result = [result], roomkey = [roomkey]"
+    ""
     if kitchen == 0:
         if result == "us1":
             if roomkey == 0:
@@ -317,12 +328,16 @@ label dei2:
         jump key_found
 label key_found:
     scene black
-    show screen keyfound with Dissolve(2)
+    call screen keyfound with Dissolve(2)
     $ result = _return
     "Я нашел ключ"
-    jump final
-label final:
-    hide screen keyfound
-    scene street with Dissolve(1)
-    "я сбежал"
-    " "
+    if result == "final":
+        hide screen keyfound
+
+        "Конец"
+    return
+        #jump final
+#label final:
+    #$renpy.movie_cutscene('hall_video3.WEBM')########ПО ЩЕЛЧКУ ПРОПАДАЕТ. НЕ ВОСПРОИЗВОДИТСЯ
+    #"Конец"
+    #return
